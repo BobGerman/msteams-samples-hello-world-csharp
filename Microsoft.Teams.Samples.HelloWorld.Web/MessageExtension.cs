@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Microsoft.Bot.Connector;
@@ -39,16 +40,16 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
 
         private static ComposeExtensionAttachment GetAttachment(string title = null)
         {
-            var card = new ThumbnailCard
-            {
-                Title = !string.IsNullOrWhiteSpace(title) ? title : Faker.Lorem.Sentence(),
-                Text = Faker.Lorem.Paragraph(),
-                Images = { new CardImage("http://lorempixel.com/640/480?rand=" + DateTime.Now.Ticks.ToString()) }
-            };
+                var card = new ThumbnailCard
+                {
+                    Title = !string.IsNullOrWhiteSpace(title) ? title : Faker.Lorem.Sentence(),
+                    Text = Faker.Lorem.Paragraph(),
+                    Images = new List<CardImage> { new CardImage("http://lorempixel.com/640/480?rand=" + DateTime.Now.Ticks.ToString()) }
+                };
 
-            return card
-                .ToAttachment()
-                .ToComposeExtensionAttachment();
+                return card
+                    .ToAttachment()
+                    .ToComposeExtensionAttachment();
         }
     }
 }
